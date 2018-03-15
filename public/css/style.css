@@ -1,0 +1,34 @@
+html, body
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+header
+{
+	background-color: #139ED1;
+}
+
+h1, h2, .eltFooter
+{
+	font-family: 'Courgette', cursive;
+}
+
+li, ul
+{
+     list-style-type: none;
+}
+
+.badScript
+{
+	font-family: 'Bad Script', cursive;
+}
+
+
+/* Party connection */
+
+.imageConnection
+{
+	height: 60px;
+	width: 60px;
+}
