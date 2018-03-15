@@ -1,16 +1,6 @@
 <?php $title = 'Accueil | Jean Rochefort'; ?>
 
 
-<?php 
-$article = App\Model\ArticleManager::getArticle();
-  if($article === false){
-
-    App\Cntr::Error();
-    
-  }
-?>
-
-
 <!-- Image home page and title h1 -->
 
  <div class="container mt-3 mb-3">

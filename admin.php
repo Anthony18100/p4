@@ -2,11 +2,6 @@
 require ('App/Autoloader.php');
 App\Autoloader::register();
 
-
-
-
-
-
 ob_start();
 
 

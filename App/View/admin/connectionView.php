@@ -1,15 +1,10 @@
-<?php $title = 'Accueil | Jean Rochefort'; ?>
+<?php $title = 'Accueil | Jean Rochefort'; 
 
-      <?php
+
 session_start();
 
-$bdd = new PDO('mysql:host=localhost;dbname=blog', 'root', 'root'); 
-if(isset($_SESSION['id'])) {
-   $requser = $bdd->prepare("SELECT * FROM clients WHERE id = ?");
-   $requser->execute(array($_SESSION['id']));
-   $user = $requser->fetch();
-  header("Location: http://localhost/php/admin.php");
-}
+$restrictionAdmin = new App\Model\Admin\IdentificationManager();
+$restrictionAdmin->restrictionAdmin();
 
         if(isset($_POST)){
 
@@ -29,44 +24,6 @@ if(isset($_SESSION['id'])) {
         }
 
       }
-
-   
-      
-      // $bdd = new PDO('mysql:dbname=blog; host=localhost', 'root', 'root');
-
-    //     if(isset($_POST['formconnexion'])){
-
-    //       $mailconnect = htmlspecialchars($_POST['mailconnect']);
-    //       $mdpconnect = sha1($_POST['mdpconnect']);
-
-    //       if(!empty($mailconnect) AND !empty($mdpconnect)) {
-    //         $requser = $bdd->prepare("SELECT * FROM members WHERE email = ? AND password = ?");
-    //         $requser->execute(array($mailconnect, $mdpconnect));
-    //         $userexist = $requser->rowCount();
-    //           if($userexist == 1) {
-    //            $userinfo = $requser->fetch();
-    //            $_SESSION['id'] = $userinfo['id'];
-    //             header("Location: admin.php");
-        
-
-    //     }else{
-
-    //       $erreur = "Mauvais mail ou mot de passe !";
-
-    //     }
-
-
-
-
-    //   }else{
-
-    //       $erreur = 'Tous les champs doivent être complétés';
-
-    //   }
-
-
-
-    // }
 
 
         $form = new App\Controller\Form\Form($_POST);

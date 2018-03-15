@@ -24,6 +24,8 @@ class AdminController{
 
 		$articles = ArticleManager::getArticles('ORDER BY article_date DESC LIMIT 0, 3');
 
+		
+
 		require 'App/View/admin/post/index.php';
 
 	}

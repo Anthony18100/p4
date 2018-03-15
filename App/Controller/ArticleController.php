@@ -6,6 +6,7 @@ use App\Model\ArticleManager;
 use App\Model\CommentManager;
 
 
+
 class ArticleController{
 
 	public function home(){
@@ -18,9 +19,18 @@ class ArticleController{
 
 	public function article(){
 
+		$article = ArticleManager::getArticle();
+
+  			if($article === false){
+
+   				App\Cntr::Error();
+    
+  			}			
+
 		$comment = CommentManager::getComment();
 
 		require 'App/View/frontend/articleView.php';
+
 
 	}
 
