@@ -1,30 +1,21 @@
-<?php $title = 'Accueil | Jean Rochefort'; 
-
-
+<?php 
 session_start();
 
 $restrictionAdmin = new App\Model\Admin\IdentificationManager();
 $restrictionAdmin->restrictionAdmin();
 
-        if(isset($_POST)){
+        
+      if(isset($_POST['formConnection'])){
 
-           if(!empty($_POST['mailconnect']) AND !empty($_POST['mdpconnect'])) {
+        $auth = new App\Model\Admin\IdentificationManager();
+        if($auth->login($_POST['email'], $_POST['password'])){
 
-            $mailconnect = htmlspecialchars($_POST['mailconnect']);
-            $mdpconnect = sha1($_POST['mdpconnect']);
-
-          $auth = new App\Model\Admin\IdentificationManager();
-          $auth->login($mailconnect, $mdpconnect);
-         
-          
-        }else{
-
-          $erreur = "Tous les champs doivent être complétés";
+          header("Location: admin.php");
+          exit;
 
         }
 
       }
-
 
         $form = new App\Controller\Form\Form($_POST);
 
@@ -55,21 +46,21 @@ $restrictionAdmin->restrictionAdmin();
 
         <div class="form-group">
 
-          <label for="exampleInputEmail1">Votre adresse mail</label>
+          <?= $form->label('email', 'Votre adresse mail'); ?>
 
-          <?= $form->input('email', 'mailconnect', 'Entrer votre email'); ?>
+          <?= $form->input('email',  'email', 'Entrer votre email'); ?>
 
         </div>
 
         <div class="form-group">
 
-          <label for="exampleInputPassword1">Votre mot de passe</label>
+          <?= $form->label('password', 'Votre mot de passe'); ?>
 
-          <?= $form->input('password', 'mdpconnect', 'Entrer votre mot de passe'); ?>
+          <?= $form->input('password',  'password', 'Entrer votre mot de passe'); ?>
 
         </div>
 
-        <input type="submit" name="formconnexion" class="btn btn-primary" value="Valider"/>
+        <input type="submit" name="formConnection" class="btn btn-primary" value="Valider"/>
 
       </form>
 

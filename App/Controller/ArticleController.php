@@ -17,15 +17,17 @@ class ArticleController{
 
 	}
 
+//
+
 	public function article(){
 
 		$article = ArticleManager::getArticle();
 
-  			if($article === false){
+  			// if($article === false){
 
-   				App\Cntr::Error();
+   		// 		App\Cntr::Error();
     
-  			}			
+  			// }			
 
 		$comment = CommentManager::getComment();
 

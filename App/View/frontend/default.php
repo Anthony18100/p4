@@ -25,7 +25,7 @@
             
         <li class="nav-item mt-1"><a class="p-2 text-light nav-link " href="">Chapitre</a></li>
 
-        <li class="nav-item"><a class="p-2 text-light nav-link " href="">
+        <li class="nav-item"><a class="p-2 text-light nav-link " href="http://localhost/php/admin.php?p=connection">
           
            <i class="far fa-user fa-2x"></i>
 

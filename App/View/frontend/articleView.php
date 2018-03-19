@@ -21,13 +21,7 @@
 
       <h3 class="text-center text-primary pb-3">Les commentaires</h3>
 
-<?php 
-
-foreach($comment as $comments):
-
-
-?>
-
+<?php foreach($comment as $comments): ?>
 
       <div class="border-top border-success pt-2">
 
@@ -39,9 +33,53 @@ foreach($comment as $comments):
 
       </div>  
 
-
-
 <?php endforeach; ?>
+
+<?php 
+
+  if(!empty($_POST)){
+
+    $result = ArticleManager::newComment([
+
+      'title' => $_POST['title'],
+      'content' => $_POST['content'], 
+      'article_date' => 'Now()',
+
+      ]);
+
+    }
+
+
+        $form = new App\Controller\Form\Form($_POST);
+
+?>
+
+
+       <form class="mt-4" method="POST" action="">
+
+        <div class="form-group">
+
+          <?= $form->label('title', 'Votre titre'); ?>
+
+          <?= $form->input('text', 'title', 'Saisissez votre titre'); ?>
+
+        </div>
+
+        <div class="form-group">
+
+          <?= $form->label('content', 'Votre article'); ?>
+
+          <?= $form->textarea('text', 'content', 'Entrer votre texte'); ?>
+
+        </div>
+
+        <div class="w-100 d-flex justify-content-center">
+
+          <?= $form->button('submit', 'btn btn-primary mr-3', 'formArticle', 'Soumettre'); ?>
+
+        </div>
+
+      </form>
 
   </div>
 

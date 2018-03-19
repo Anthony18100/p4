@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Database;
+
 class Manager{
 
 	const DB_NAME = 'blog';

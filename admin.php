@@ -16,11 +16,13 @@ ob_start();
       $controller->homeAdmin();
 
 
-      } else if($_GET['p'] === 'article'){
+      } else if($_GET['p'] === 'edition'){
 
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
-          
+          $controller = new App\Controller\Admin\AdminController();
+
+          $controller->edition();
 
         }else{
 
@@ -39,6 +41,18 @@ ob_start();
           $controller = new App\Controller\Admin\AdminController();
 
           $controller->disconnection();
+
+      }else if($_GET['p'] === 'newedition'){
+
+          $controller = new App\Controller\Admin\AdminController();
+
+          $controller->newEdition();
+
+      }else if($_GET['p'] === 'delete'){
+
+          $controller = new App\Controller\Admin\AdminController();
+
+          $controller->deleteArticle();
 
       }
 

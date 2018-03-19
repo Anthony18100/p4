@@ -1,24 +1,34 @@
-<?php $title = 'Edition Article | Jean Rochefort'; 
-
-
+<?php
 session_start();
+$acces = new App\Model\Admin\IdentificationManager();
+$acces->sessionExist();
 
-$restrictionAdmin = new App\Model\Admin\IdentificationManager();
-$restrictionAdmin->restrictionAdmin();
+$title = 'Edition | Jean Rochefort'; 
 
-$form = new App\Controller\Form\Form($_POST);
+        if(!empty($_POST)){
 
-      ?>
+            $result = $article->update($_GET['id'], [
+
+              'title' => $_POST['title'],
+              'content' => $_POST['content']
+
+            ]);
+
+        }
+
+        $post = $article;
+
+        $form = new App\Controller\Form\Form($post);
+
+?>
 
 <!-- Section | party login form admin-->
 
-    <div class="container mt-5 mb-5 col-xl-3 col-md-5 col-sm-6">
+    <div class="container mb-5">
 
       <div class="text-center mt-3 p-0 mt-xl-5">
 
-        <img src="public/images/icons/page-connection.png" class="img-fluid imageConnection mb-4" alt="Icône espace membre">
-
-        <h2 class="text-primary">Espace de connexion</h2>
+        <h2 class="text-primary">Partie édition</h2>
 
       </div>
 
@@ -31,25 +41,38 @@ $form = new App\Controller\Form\Form($_POST);
          }
          ?>
 
+
       <form class="mt-4" method="POST">
 
         <div class="form-group">
 
-          <label for="exampleInputEmail1">Votre adresse mail</label>
+          <?= $form->label('title', 'Votre titre'); ?>
 
-          <?= $form->input('email', 'mailconnect', 'Entrer votre email'); ?>
+          <?= $form->input('text', 'title', 'Saisissez votre titre'); ?>
 
         </div>
 
         <div class="form-group">
 
-          <label for="exampleInputPassword1">Votre mot de passe</label>
+          <?= $form->label('content', 'Votre article'); ?>
 
-          <?= $form->input('password', 'mdpconnect', 'Entrer votre mot de passe'); ?>
+          <?= $form->textarea('text', 'content', 'Entrer votre texte'); ?>
 
         </div>
 
-        <input type="submit" name="formconnexion" class="btn btn-primary" value="Valider"/>
+        <div class="w-100 d-flex justify-content-center">
+
+          <?= $form->button('submit', 'btn btn-primary mr-3', 'formArticle', 'Soumettre'); ?>
+      
+        </div>
+
+      </form>
+
+       <form method="POST" action="http://localhost/php/admin.php?p=delete&id=<?= $post->id; ?>">
+
+            <input type="hidden" name="id" value="<?= $post->id; ?>">
+            
+            <?= $form->button('submit', 'btn btn-danger ml-3', 'delete', 'Supprimer'); ?>
 
       </form>
 

@@ -68,7 +68,11 @@ $title = 'Accueil Administration | Jean Rochefort';
 
       <div class="w-100 d-flex justify-content-center">
 
-      <button type="button" class="btn btn-primary mr-3">Créer un nouvel article </button>
+      <a href="http://localhost/php/admin.php?p=newedition">
+
+        <button type="button" class="btn btn-primary mr-3">Créer un nouvel article </button>
+
+      </a>
 
       <a href="http://localhost/php/admin.php?p=disconnection">
 

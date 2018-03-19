@@ -2,8 +2,8 @@
 
 namespace App\Model\Admin;
 
-use App\Cntr;
 use App\Database;
+use App\Model\Manager;
 
 
 class IdentificationManager{
@@ -14,41 +14,46 @@ class IdentificationManager{
 		if($_SESSION['id'] == null) {
 
   			header('Location: http://localhost/php/admin.php?p=connection');
+  			exit;
 
 		}
 
 	}
+
+//Fonction pour interdire un membre connecté à acceder à differentes pages tel que la page de connexion	
 
 	public function restrictionAdmin(){
 
 		if(isset($_SESSION['id'])){
 
 			header ("Location: http://localhost/php/admin.php?p=home" );
+			exit;
 
 		}
 
 	}
 	
-	public function login($mailconnect, $mdpconnect){
+	public function login($email, $password){
 
-			$bdd = new \PDO('mysql:dbname=blog; host=localhost', 'root', 'root');
+			
+            $user = Manager::getDb()->prepare('SELECT * FROM members WHERE email = ?', [$email]);
 
-				$requser = $bdd->prepare("SELECT * FROM members WHERE email = ? AND password = ?");
-		        $requser->execute(array($mailconnect, $mdpconnect));
-		        $userexist = $requser->rowCount();
-	        if($userexist == 1) {
-	            $userinfo = $requser->fetch();
-	            $_SESSION['id'] = $userinfo['id'];
-	            header('Location: admin.php');
-            }else{
+            	if($user){
 
-            	$erreur = "Mauvais mdp ou id";
+            		if($user->password === sha1($password)){
 
-            }
+            			$_SESSION['id'] = $user->id;
 
-            
+            			header ("Location: http://localhost/php/admin.php?p=home" );
+						exit;
 
-          }
+            		}		
+
+            	}
+
+            	die('non');
+
+          	}
 
 	
 		

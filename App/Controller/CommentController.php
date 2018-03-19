@@ -2,7 +2,6 @@
  
 namespace App\Controller;
 
-use Controller\Controller;
 
  class CommentController{
 
