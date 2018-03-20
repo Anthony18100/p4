@@ -6,15 +6,22 @@ namespace App\Model;
 class ArticleManager extends Manager{
 
 
-//Reccuperation de plusieurs articles 	
+/**
+ * [getArticles Réccuperation des articles (accueil)]
+ * @param  [type] $addCondition [description]
+ * @return [type]               [description]
+ */
 	public static function getArticles($addCondition){
 
-		return Manager::getDb()->query('SELECT id, title, content, DATE_FORMAT(article_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM articles ' . $addCondition . '', __CLASS__);
+		return Manager::getDb()->query('SELECT id, title, content, DATE_FORMAT(article_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM articles ' . $addCondition . '', __CLASS__, true);
 
 	}
 
 
-//Reccuperation d'un article par page avec getId
+/**
+ * [getArticle Réccuperation de l'article avec la méthode $_GET]
+ * @return [type] [description]
+ */
 	public static function getArticle(){
 
 		return Manager::getDb()->prepare('SELECT * FROM articles WHERE id = ?', [$_GET['id']], __CLASS__ );
@@ -22,6 +29,36 @@ class ArticleManager extends Manager{
 	}
 
 
+/**
+ * [getUrl Reccuperation de id en cours]
+ * @return [type] [description]
+ */
+	public function getUrl(){
+
+		return 'index.php?p=article&id=' . $this->id;
+
+	}
+
+
+/**
+ * [getExtrait Affichage extrait des articles]
+ * @return [type] [description]
+ */
+	public function getExtrait(){
+
+		$html = '<p>' . substr($this->content, 0,  100) . '...</p>';
+		$html .= '<p><a href="'. $this->getUrl() . '">Voir la suite</a></p>';
+		return $html;
+
+	}
+
+
+/**
+ * [update description]
+ * @param  [type] $id     [description]
+ * @param  [type] $fields [description]
+ * @return [type]         [description]
+ */
 	public function update($id, $fields){
 
 		$sql_parts = [];
@@ -55,6 +92,12 @@ class ArticleManager extends Manager{
 
 	}
 
+
+/**
+ * [createNew description]
+ * @param  [type] $fields [description]
+ * @return [type]         [description]
+ */
 	public function createNew($fields){
 
 		$title = htmlspecialchars($_POST['title']);
@@ -80,6 +123,12 @@ class ArticleManager extends Manager{
 
 	}
 
+
+/**
+ * [deleteArticle description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
 	public function deleteArticle($id){
 
 	 	$result = Manager::getDb()->prepare("DELETE FROM articles WHERE id = ?", [$id], true);
@@ -92,29 +141,6 @@ class ArticleManager extends Manager{
 
 	}
 
-	// public function lastArticleId(){
-
-	// 	return Manager::getDb()->lastArticleId();
-
-	// }
-
-
-//Fonction pour reccuperer l'id de l'article
-	public function getUrl(){
-
-		return 'index.php?p=article&id=' . $this->id;
-
-	}
-
-
-//Fonction pour afficher extrait d'un article
-	public function getExtrait(){
-
-		$html = '<p>' . substr($this->content, 0,  100) . '...</p>';
-		$html .= '<p><a href="'. $this->getUrl() . '">Voir la suite</a></p>';
-		return $html;
-
-	}
 
 
 }

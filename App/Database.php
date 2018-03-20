@@ -74,7 +74,7 @@ class Database{
 		}
 
 
-		if($one){
+		if($one === false){
 
 			$datas = $req->fetch();
 

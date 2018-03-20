@@ -6,11 +6,19 @@ use App\Model\ArticleManager;
 use App\Model\CommentManager;
 use App\Model\Manager;
 
-// Class AdminController who controle the pages for members
+/**
+ * Class AdminController 
+ *
+ * Toutes les vues pour les administrateurs du site
+ */
 
 class AdminController{
 
-//Page of connection for members
+/**
+ * connection()
+ *
+ * Page de connection des membres
+ */
 
 	public function connection(){
 
@@ -20,28 +28,51 @@ class AdminController{
 	}
 
 
-//Page for destroy the session
+/**
+ * disconnection()
+ * 
+ * Page de déconnection membres
+ */
 
 	public function disconnection(){
 
-		require 'App/View/admin/deco.php';
+		require 'App/View/admin/signoutView.php';
 
 	}
 
 
-//Page home for the members
+/**
+ * homeAdmin()
+ *
+ * Page d'accueil des membres
+ */
 
 	public function homeAdmin(){
 
 		$articles = ArticleManager::getArticles('ORDER BY article_date DESC LIMIT 0, 3');
 
-		
+		$resulat =  CommentManager::allReportComment();
+
+		$skockeValues = [];
+
+		foreach($resulat as $valeur){
+
+			$skockeValues[] = "$valeur";
+
+
+		}
+
+		$nb = implode(', ',$skockeValues);
 
 		require 'App/View/admin/post/index.php';
 
 	}
 
-//Page for edit or delete article existing
+/**
+ * edtion()
+ *
+ * Page d'édition d'article existant et suppression
+ */
 
 	public function edition(){
 
@@ -55,11 +86,15 @@ class AdminController{
 
 		$comment = CommentManager::getComment();
 
-		require 'App/View/admin/post/edition.php';
+		require 'App/View/admin/post/editionView.php';
 
 	}
 
-//Page for create new article	
+/**
+ * newEdition()
+ *
+ * Page pour éditer un nouvel article
+ */
 
 	public function newEdition(){
 		
@@ -70,6 +105,11 @@ class AdminController{
 	}
 
 
+/**
+ * deleteArticle()
+ * 
+ * Page de suppression des articles
+ */
 	public function deleteArticle(){
 		
 
@@ -77,6 +117,51 @@ class AdminController{
 
 
 	}
+
+/**
+ * reportComment()
+ *
+ * Page qui liste les commentaires signalés
+ */
+
+	public function reportComment(){
+		
+		$comments = CommentManager::reportCommentAll();
+
+		require 'App/View/admin/post/allcommentView.php';
+
+
+
+	}
+
+/**
+ * deleteArticle()
+ *
+ * Suppression du commentaires
+ */
+
+	public function deleteComment(){
+		
+
+		require 'App/View/admin/post/deleteComView.php';
+
+
+	}
+
+/**
+ * validateComment()
+ *
+ * Annulation de la mise en suppression du commentaire
+ */
+
+	public function validateComment(){
+		
+
+		require 'App/View/admin/post/validateCommentView.php';
+
+
+	}
+
 
 
 }

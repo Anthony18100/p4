@@ -31,6 +31,30 @@
 
         <p><span class="text-primary">Le: <?= $comments->creation_date_fr ?></span></p>
 
+
+
+
+
+<?php 
+
+$bdd = new PDO('mysql:dbname=blog; host=localhost', 'root', 'root');
+
+$nb = $bdd->prepare('SELECT * FROM report_comment WHERE id_report_comment = ?');
+        $nb->execute(array($comments->id));
+        $nb = $nb->rowCount();
+
+
+?>
+      
+      <form method="POST" action="http://localhost/php/index.php?p=report&id=<?= $comments->id; ?>">
+
+            <input type="hidden" name="id" value="<?= $comments->id; ?>">
+            
+            <button class="btn btn-danger" type="submit">Signaler (<?= $nb; ?>)</button>
+
+      </form>
+
+
       </div>  
 
 <?php endforeach; ?>
@@ -39,11 +63,10 @@
 
   if(!empty($_POST)){
 
-    $result = ArticleManager::newComment([
-
-      'title' => $_POST['title'],
-      'content' => $_POST['content'], 
-      'article_date' => 'Now()',
+    $result = App\Model\CommentManager::newComment($_GET['id'],[
+      'pseudo' => $_POST['pseudo'],
+      'comment' => $_POST['comment'], 
+      'comment_date' => 'Now()',
 
       ]);
 
@@ -59,17 +82,17 @@
 
         <div class="form-group">
 
-          <?= $form->label('title', 'Votre titre'); ?>
+          <?= $form->label('pseudo', 'Votre pseudo'); ?>
 
-          <?= $form->input('text', 'title', 'Saisissez votre titre'); ?>
+          <?= $form->input('text', 'pseudo', 'Saisissez votre pseudo'); ?>
 
         </div>
 
         <div class="form-group">
 
-          <?= $form->label('content', 'Votre article'); ?>
+          <?= $form->label('comment', 'Votre commentaire'); ?>
 
-          <?= $form->textarea('text', 'content', 'Entrer votre texte'); ?>
+          <?= $form->textarea('text', 'comment', 'Entrer votre commentaire'); ?>
 
         </div>
 

@@ -15,6 +15,11 @@ ob_start();
 
       $controller->homeAdmin();
 
+      }else if ($_GET['p'] === 'report') {
+
+      $controller = new App\Controller\Admin\AdminController();
+
+      $controller->reportComment();
 
       } else if($_GET['p'] === 'edition'){
 
@@ -53,6 +58,18 @@ ob_start();
           $controller = new App\Controller\Admin\AdminController();
 
           $controller->deleteArticle();
+
+      }else if($_GET['p'] === 'deletecom'){
+
+          $controller = new App\Controller\Admin\AdminController();
+
+          $controller->deleteComment();
+
+      }else if($_GET['p'] === 'validatecom'){
+
+          $controller = new App\Controller\Admin\AdminController();
+
+          $controller->validateComment();
 
       }
 

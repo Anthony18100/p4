@@ -6,9 +6,19 @@ use App\Database;
 use App\Model\Manager;
 
 
+/**
+ * Class IdentificationManager
+ *
+ * Cette classe est utilisé pour la connexion/déconnexion des membres et de savoir si une session est active
+ */
+
 class IdentificationManager{
 
 
+/**
+ * [sessionExist Connaître si la $_SESSION est active]
+ * @return [type] [description]
+ */
 	public function sessionExist(){
 
 		if($_SESSION['id'] == null) {
@@ -20,8 +30,11 @@ class IdentificationManager{
 
 	}
 
-//Fonction pour interdire un membre connecté à acceder à differentes pages tel que la page de connexion	
 
+/**
+ * [restrictionAdmin Restriction des pages que aux membres]
+ * @return [type] [description]
+ */
 	public function restrictionAdmin(){
 
 		if(isset($_SESSION['id'])){
@@ -32,11 +45,18 @@ class IdentificationManager{
 		}
 
 	}
-	
+
+
+/**
+ * [login Verification si l'utilisateur existe (formulaire de connexion)]
+ * @param  [string] $email    [$_POST['email']
+ * @param  [string] $password [$_POST['password']
+ * @return [bool]           [renvoye true si l'utilisateur existe]
+ */
 	public function login($email, $password){
 
 			
-            $user = Manager::getDb()->prepare('SELECT * FROM members WHERE email = ?', [$email]);
+            $user = Manager::getDb()->prepare('SELECT * FROM members WHERE email = ?', [$email], null, false);
 
             	if($user){
 

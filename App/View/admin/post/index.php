@@ -68,9 +68,24 @@ $title = 'Accueil Administration | Jean Rochefort';
 
       <div class="w-100 d-flex justify-content-center">
 
+<?php 
+
+// $bdd = new PDO('mysql:dbname=blog; host=localhost', 'root', 'root');
+
+// $res = $bdd->query('select count(*) as nb from report_comment');
+// $data = $res->fetch();
+// $nb = $data['nb'];
+?>
+
+      <a href="http://localhost/php/admin.php?p=report">
+
+       <button type="button" class="btn btn-warning mr-3">Les commentaires signalés (<?= $nb; ?>)</button>
+
+      </a>
+
       <a href="http://localhost/php/admin.php?p=newedition">
 
-        <button type="button" class="btn btn-primary mr-3">Créer un nouvel article </button>
+        <button type="button" class="btn btn-primary mr-3 ml-3">Créer un nouvel article </button>
 
       </a>
 

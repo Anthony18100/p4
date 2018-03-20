@@ -6,9 +6,17 @@ use App\Model\ArticleManager;
 use App\Model\CommentManager;
 
 
-
+/**
+ * class ArticleController
+ */
 class ArticleController{
 
+
+/**
+ * home()
+ *
+ * Page d'accueil
+ */
 	public function home(){
 
 		$articles = ArticleManager::getArticles('ORDER BY article_date DESC LIMIT 0, 3');
@@ -17,7 +25,11 @@ class ArticleController{
 
 	}
 
-//
+/**
+ * article()
+ *
+ * Reccuperation de l'article correspondant avec $_GET['id']
+ */
 
 	public function article(){
 
@@ -29,12 +41,26 @@ class ArticleController{
     
   			// }			
 
-		$comment = CommentManager::getComment();
+		$comment = CommentManager::getComment();	
 
 		require 'App/View/frontend/articleView.php';
 
+	}
+
+
+/**
+ * report()
+ *
+ * Affichage des commentaire correspond à $_GET['id']
+ */
+	public function report(){
+
+		$comment = CommentManager::getComment();
+
+		require 'App/View/frontend/reportView.php';
 
 	}
+
 
 
 }

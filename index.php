@@ -32,6 +32,20 @@ ob_start();
 
         }
   
+      } else if($_GET['p'] === 'report'){
+
+        if (isset($_GET['id']) && $_GET['id'] > 0){
+
+          $controller = new App\Controller\ArticleController();
+
+          $controller->report();
+
+        }else{
+
+          throw new Exception('Aucun identifiant de billet envoyé');
+
+        }
+  
       }
 
   }else{
