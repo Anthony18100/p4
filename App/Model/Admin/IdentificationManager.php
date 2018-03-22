@@ -12,12 +12,13 @@ use App\Model\Manager;
  * Cette classe est utilisé pour la connexion/déconnexion des membres et de savoir si une session est active
  */
 
-class IdentificationManager{
+class IdentificationManager extends Manager{
 
 
 /**
- * [sessionExist Connaître si la $_SESSION est active]
- * @return [type] [description]
+ * Method to prohibit the visitor from accessing the page
+ * 
+ * @return [Bool] Else Bool return true -> visitor redirect home
  */
 	public function sessionExist(){
 
@@ -69,15 +70,13 @@ class IdentificationManager{
 
             		}		
 
-            	}
+		            	}else{
 
-            	die('non');
+		            		die('error');
 
-          	}
+            			}		
 
-	
-		
-
+          			}
 
 }
 

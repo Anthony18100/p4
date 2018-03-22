@@ -1,9 +1,0 @@
-var WindowFormComment{
-
-	function openWindow(){
-
-
-
-	}
-
-}

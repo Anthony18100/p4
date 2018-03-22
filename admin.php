@@ -1,4 +1,6 @@
 <?php
+use App\Controller\Controller;
+
 require ('App/Autoloader.php');
 App\Autoloader::register();
 
@@ -11,23 +13,17 @@ ob_start();
 
     if ($_GET['p'] === 'home') {
 
-      $controller = new App\Controller\Admin\AdminController();
-
-      $controller->homeAdmin();
+      Controller::homeAdmin();
 
       }else if ($_GET['p'] === 'report') {
 
-      $controller = new App\Controller\Admin\AdminController();
-
-      $controller->reportComment();
+        Controller::reportComment();
 
       } else if($_GET['p'] === 'edition'){
 
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->edition();
+          Controller::edition();
 
         }else{
 
@@ -35,49 +31,31 @@ ob_start();
 
         }
   
-      }else if($_GET['p'] === 'connection'){
-
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->connection();
-
       }else if($_GET['p'] === 'disconnection'){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->disconnection();
+          Controller::disconnection();
 
       }else if($_GET['p'] === 'newedition'){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->newEdition();
+          Controller::newEdition();
 
       }else if($_GET['p'] === 'delete'){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->deleteArticle();
+          Controller::deleteArticle();
 
       }else if($_GET['p'] === 'deletecom'){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->deleteComment();
+          Controller::deleteComment();
 
       }else if($_GET['p'] === 'validatecom'){
 
-          $controller = new App\Controller\Admin\AdminController();
-
-          $controller->validateComment();
+          Controller::validateComment();
 
       }
 
   }else{
 
-      $controller = new App\Controller\Admin\AdminController();
-
-      $controller->homeAdmin();
+      Controller::homeAdmin();
 
   }
 
@@ -90,5 +68,5 @@ catch(Exception $e) {
 
 $content = ob_get_clean();
 
-require 'App/View/frontend/default.php';   
+require 'App/View/Default.php';   
 

@@ -41,9 +41,9 @@ class Form{
 	}
 
 
-	public function textarea($type, $name, $placeholder){
+	public function textarea($type, $name, $id, $placeholder){
 
-		return '<textarea type="'. $type . '" class="form-control" name="' . $name . '" placeholder="' . $placeholder .'">' . $this->getValue($name) . '</textarea> ';
+		return '<textarea type="'. $type . '" class="form-control" name="' . $name . '" id="' . $id . '" placeholder="' . $placeholder .'">' . $this->getValue($name) . '</textarea> ';
 
 	}
 

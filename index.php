@@ -1,10 +1,9 @@
 <?php
+use App\Controller\Controller;
 
-// require ('controller/frontend.php');
-
+//Appel de l'autoader
 require ('App/Autoloader.php');
 App\Autoloader::register();
-
 
 ob_start();
 
@@ -14,17 +13,20 @@ ob_start();
 
     if ($_GET['p'] === 'home') {
 
-      $controller = new App\Controller\ArticleController();
+       Controller::home();
+       $title ="Jean Forteroche | Accueil";
 
-      $controller->home();
+       }else if($_GET['p'] === 'connection'){
+
+          Controller::connection();
+          $title ="Jean Forteroche | Connexion";
 
       } else if($_GET['p'] === 'article'){
 
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
-          $controller = new App\Controller\ArticleController();
-
-          $controller->article();
+          Controller::article();
+          $title ="Jean Forteroche | Article";
 
         }else{
 
@@ -36,10 +38,9 @@ ob_start();
 
         if (isset($_GET['id']) && $_GET['id'] > 0){
 
-          $controller = new App\Controller\ArticleController();
-
-          $controller->report();
-
+          Controller::report();
+          $title ="Jean Forteroche | Signalement";
+          
         }else{
 
           throw new Exception('Aucun identifiant de billet envoyé');
@@ -50,10 +51,8 @@ ob_start();
 
   }else{
 
-     $controller = new App\Controller\ArticleController();
-
-      $controller->home();
-
+    Controller::home();
+    $title ="Jean Forteroche | Accueil";
   }
 
 }
@@ -65,4 +64,4 @@ catch(Exception $e) {
 
 $content = ob_get_clean();
 
-require 'App/View/frontend/default.php';   
+require 'App/View/Default.php';   
