@@ -9,7 +9,7 @@ use App\Model\Manager;
 /**
  * Class IdentificationManager
  *
- * Cette classe est utilisé pour la connexion/déconnexion des membres et de savoir si une session est active
+ * Class connection/disconnection the members and else session is active
  */
 
 class IdentificationManager extends Manager{
@@ -24,7 +24,7 @@ class IdentificationManager extends Manager{
 
 		if($_SESSION['id'] == null) {
 
-  			header('Location: http://localhost/php/admin.php?p=connection');
+  			header('Location: index.php?p=connection');
   			exit;
 
 		}
@@ -33,14 +33,14 @@ class IdentificationManager extends Manager{
 
 
 /**
- * [restrictionAdmin Restriction des pages que aux membres]
+ * [restrictionAdmin Restriction the pages membres]
  * @return [type] [description]
  */
 	public function restrictionAdmin(){
 
 		if(isset($_SESSION['id'])){
 
-			header ("Location: http://localhost/php/admin.php?p=home" );
+			header ("Location: admin.php?p=home&id=1" );
 			exit;
 
 		}
@@ -65,18 +65,24 @@ class IdentificationManager extends Manager{
 
             			$_SESSION['id'] = $user->id;
 
-            			header ("Location: http://localhost/php/admin.php?p=home" );
-						exit;
+            			header ("Location: admin.php?p=home&id=1" );
 
-            		}		
+            		}else{
 
-		            	}else{
+            			return Session::setFlash('Vos identifiants sont incorrects', 'alert');
 
-		            		die('error');
+            		}
 
-            			}		
 
-          			}
+		        }else{
+
+		        	return Session::setFlash('Vos identifiants sont incorrects', 'danger');
+       		
+            	}
+
+
+        	}
+
 
 }
 

@@ -1,10 +1,13 @@
 <?php 
-//Classe connexion a la base de donnée
-namespace App;
 
+namespace App;
 use \PDO;
 
 class Database{
+
+	/**
+	 * Attributs
+	 */
 
 	private $db_name;
 	private $db_user;
@@ -12,7 +15,13 @@ class Database{
 	private $db_host;
 	private $pdo;
 
-
+	/**
+	 * Connection BDD
+	 * @param string $db_name [Name BDD]
+	 * @param string $db_user [User BDD]
+	 * @param string $db_pass [Pass BDD]
+	 * @param string $db_host [Host BDD]
+	 */
 	public function __construct($db_name, $db_user = 'root', $db_pass = 'root', $db_host = 'localhost'){
 
 		$this->db_name = $db_name;
@@ -25,9 +34,10 @@ class Database{
 
 	}
 
-//Acesseur permettant la connexion a la base donnée..
-//On verifie si il y a deja eu une connexion si c'est le cas on voit sur mon attribut $PDO
-//Si on est pas connecte $pdo l35
+	/**
+	 * getPDO Verified connection database exist
+	 * @return [String] [connection database]
+	 */
 	private function getPDO(){
 
 		if($this->pdo === null){
@@ -44,7 +54,9 @@ class Database{
 
 	}
 
-
+	/**
+	 * Method query
+	 */
 	public function query($statement, $class_name = null, $one = false){
 
 		$req = $this->getPDO()->query($statement);

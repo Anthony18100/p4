@@ -2,12 +2,25 @@
 
 namespace App\Controller\Form;
 
+/**
+ * Class Form
+ *
+ * Class to build forms
+ */
 
 class Form{
 
+	/**
+	 * Attribut
+	 * @var string
+	 */
 	private $data;
 
 
+	/**
+	 * [__construct description]
+	 * @param array $data [description]
+	 */
 	public function __construct($data = array()){
 
 		$this->data = $data;

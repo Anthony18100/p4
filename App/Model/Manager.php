@@ -4,7 +4,17 @@ namespace App\Model;
 
 use App\Database;
 
+/**
+ * Manager 
+ *
+ * Connection à la BDD
+ */
+
 class Manager{
+
+	/**
+	 * Attributs
+	 */
 
 	const DB_NAME = 'blog';
 
@@ -17,7 +27,10 @@ class Manager{
 
 	private static $database;
 
-
+	/**
+	 * Connection BDD
+	 * @return $database
+	 */
 	public static function getDb(){
 
 		if(self::$database === null){
@@ -30,10 +43,25 @@ class Manager{
 
 	}
 
-	public static function Error(){
 
-		header("HTTP/1.0 404 Not found");
-    	header("Location: index.php?p=404");
+	/**
+	 * errorVisitor
+	 * @param  $errorType String
+	 */
+	public static function errorVisitor($errorType){
+
+    	require 'App/View/Frontend/404.php';
+
+	}
+
+
+	/**
+	 * errorAdmin
+	 * @param  $errorType String
+	 */
+	public static function errorAdmin($errorType){
+
+    	require 'App/View/Admin/404.php';
 
 	}
 	
