@@ -1,3 +1,9 @@
+/**
+ *
+ * ******************************Style sheet****************************
+ * 
+ */
+
 html, body
 {
 	padding: 0px;
@@ -36,7 +42,16 @@ li, ul
 }
 
 
-/*cors de la page */
+/**
+ * 
+ * **************************Body of the page*************************
+ * 
+ */
+
+.lien-h1:hover
+{
+	text-decoration: none;
+}
 
 .bodyPage
 {
@@ -51,6 +66,10 @@ li, ul
 
 }
 
+
+/**
+ * Table home page admin
+ */
 
 tr:hover {
 
@@ -77,7 +96,9 @@ tr:hover {
 }
 
 
-/* Party connection */
+/**
+ * Image page connection
+ */
 
 .imageConnection
 {
@@ -85,7 +106,9 @@ tr:hover {
 	width: 60px;
 }
 
-/*Gestion du formulaire commentaire*/
+/**
+ * Form comment
+ */
 
 .cntr-message
 {
